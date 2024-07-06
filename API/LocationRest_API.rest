@@ -1,0 +1,35 @@
+# Get Method
+GET http://localhost:8081/api/locationCont
+Content-Type: application/json
+
+
+# Add Method
+###
+POST http://localhost:8081/api/locationCont
+Content-Type: application/json
+
+{
+    "description": "Deskripsi tentang about konten",
+}
+###
+PUT http://localhost:8081/api/locationCont/2
+Content-Type: application/json
+
+{
+    "description": "Ini untuk alamat"
+}
+
+
+
+# Update Method
+###
+PUT http://localhost:8081/api/locationCont/
+Content-Type: application/json
+
+{
+    "description": "INI DESKRIPSI TERUPDATE"
+}
+
+# Delete Method
+###
+DELETE http://localhost:8081/api/locationCont/5

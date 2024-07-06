@@ -1,0 +1,38 @@
+# Get Method
+GET http://localhost:8081/api/roomcont
+Content-Type: application/json
+
+
+# Add Method
+###
+POST http://localhost:8081/api/roomcont
+Content-Type: application/json
+
+{
+    "title": "Ini judul",
+    "description": "Deskripsi tentang roomcont konten",
+    "image": "Ini Gambar"
+}
+###
+PUT http://localhost:8081/api/roomcont/
+Content-Type: multipart/form-data
+
+{
+    "description": "INI DESKRIPSI TERUPDATE",
+    "image": "Gambar.jpg"
+}
+
+
+
+# Update Method
+###
+PUT http://localhost:8081/api/roomcont/
+Content-Type: application/json
+
+{
+    "description": "INI DESKRIPSI TERUPDATE"
+}
+
+# Delete Method
+###
+DELETE http://localhost:8081/api/roomcont/5

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Upload</title>
+</head>
+<body>
+  <h2>Image Upload</h2>
+  <form id="uploadForm" action="http://localhost:8081/api/about" method="POST" enctype="multipart/form-data">
+    <div>
+      <label for="image">Choose Image:</label>
+      <input type="file" id="image" name="image" accept=".jpg, .jpeg, .png" required>
+    </div>
+    <div>
+      <label for="description">Description:</label>
+      <input type="text" id="description" name="description" required>
+    </div>
+    <button type="submit">Upload</button>
+  </form>
+
+  <script>
+    const form = document.getElementById('uploadForm');
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+
+      const formData = new FormData(form);
+
+      try {
+        const response = await fetch('http://localhost:8081/api/about', {
+          method: 'POST',
+          body: formData
+        });
+        if (!response.ok) {
+          throw new Error('Error uploading image and description');
+        }
+        console.log('Image and description uploaded successfully');
+        form.reset(); // Reset form after successful upload
+      } catch (error) {
+        console.error('Error uploading image and description:', error);
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+# Get Method
+GET http://localhost:8081/api/about
+Content-Type: application/json
+
+
+# Add Method
+###
+POST http://localhost:8081/api/about
+Content-Type: application/json
+
+{
+    "description": "Deskripsi tentang about konten",
+    "image": "Ini Gambar"
+}
+###
+PUT http://localhost:8081/api/about/
+Content-Type: multipart/form-data
+
+{
+    "description": "INI DESKRIPSI TERUPDATE",
+    "image": "Gambar.jpg"
+}
+
+
+
+# Update Method
+###
+PUT http://localhost:8081/api/about/
+Content-Type: application/json
+
+{
+    "description": "INI DESKRIPSI TERUPDATE"
+}
+
+# Delete Method
+###
+DELETE http://localhost:8081/api/about/5

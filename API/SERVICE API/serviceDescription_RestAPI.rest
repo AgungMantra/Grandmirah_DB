@@ -1,0 +1,20 @@
+#Get Method
+GET http://localhost:8081/api/serviceDescription
+
+
+# Add Method
+###
+POST http://localhost:8081/api/serviceDescription
+Content-Type: application/json
+
+{
+    "image": "Ini Gambar"
+}
+
+# Update Method
+###
+PUT http://localhost:8081/api/serviceDescription
+
+# Delete Method
+###
+DELETE http://localhost:8081/api/serviceDescription/

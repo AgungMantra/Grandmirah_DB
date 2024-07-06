@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Location Description Upload</title>
+</head>
+<body>
+  <h2>Upload Location Description</h2>
+  <form id="locationForm" method="POST">
+    <div>
+      <label for="description">Description:</label>
+      <input type="text" id="description" name="description" required>
+    </div>
+    <button type="submit">Upload</button>
+  </form>
+
+  <script>
+    document.getElementById('locationForm').addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const formData = new FormData(event.target);
+      const description = formData.get('description');
+
+      try {
+        const response = await fetch('http://localhost:8081/api/locationCont', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ description })
+        });
+        if (!response.ok) {
+          throw new Error('Error uploading description');
+        }
+        console.log('Description uploaded successfully');
+        event.target.reset();
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    });
+  </script>
+</body>
+</html>

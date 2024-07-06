@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gallery Upload</title>
+  </head>
+  <body>
+    <h2>Gallery Upload</h2>
+    <form id="galleryForm" method="POST" enctype="multipart/form-data">
+      <div>
+        <label for="galleryTitle">Title:</label>
+        <input type="text" id="galleryTitle" name="title" required />
+      </div>
+      <div>
+        <label for="galleryImage">Choose Image:</label>
+        <input
+          type="file"
+          id="galleryImage"
+          name="image"
+          accept=".jpg, .jpeg, .png"
+          required
+        />
+      </div>
+      <button type="submit">Upload to Gallery</button>
+    </form>
+
+    <h2>Destination Gallery Upload</h2>
+    <form
+      id="destinationGalleryForm"
+      method="POST"
+      enctype="multipart/form-data"
+    >
+      <div>
+        <label for="destinationGalleryTitle">Title:</label>
+        <input type="text" id="destinationGalleryTitle" name="title" required />
+      </div>
+      <div>
+        <label for="destinationGalleryImage">Choose Image:</label>
+        <input
+          type="file"
+          id="destinationGalleryImage"
+          name="image"
+          accept=".jpg, .jpeg, .png"
+          required
+        />
+      </div>
+      <button type="submit">Upload to Destination Gallery</button>
+    </form>
+
+    <script>
+      document
+        .getElementById("galleryForm")
+        .addEventListener("submit", async (event) => {
+          event.preventDefault();
+          const formData = new FormData(event.target);
+          try {
+            const response = await fetch("http://localhost:8081/api/gallery", {
+              method: "POST",
+              body: formData,
+            });
+            if (!response.ok) {
+              throw new Error("Error uploading to gallery");
+            }
+            console.log("Uploaded to gallery successfully");
+            event.target.reset();
+          } catch (error) {
+            console.error("Error:", error);
+          }
+        });
+
+      document
+        .getElementById("destinationGalleryForm")
+        .addEventListener("submit", async (event) => {
+          event.preventDefault();
+          const formData = new FormData(event.target);
+          try {
+            const response = await fetch(
+              "http://localhost:8081/api/destinationGallery",
+              {
+                method: "POST",
+                body: formData,
+              }
+            );
+            if (!response.ok) {
+              throw new Error("Error uploading to destination gallery");
+            }
+            console.log("Uploaded to destination gallery successfully");
+            event.target.reset();
+          } catch (error) {
+            console.error("Error:", error);
+          }
+        });
+    </script>
+  </body>
+</html>

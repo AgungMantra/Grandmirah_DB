@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Service Content Upload</title>
+</head>
+<body>
+  <h2>Upload Service Content</h2>
+
+  <!-- Form for service images -->
+  <h3>Corousel Images (Title and Image)</h3>
+  <form id="serviceImagesForm" method="POST" enctype="multipart/form-data">
+    <div>
+      <label for="serviceImagesTitle">Title:</label>
+      <input type="text" id="serviceImagesTitle" name="title" required>
+    </div>
+    <div>
+      <label for="serviceImagesImage">Choose Image:</label>
+      <input type="file" id="serviceImagesImage" name="image" accept=".jpg, .jpeg, .png" required>
+    </div>
+    <button type="submit">Upload</button>
+  </form>
+
+  <!-- Form for service only images -->
+  <h3>Service Other Images (Only Image)</h3>
+  <form id="serviceOnlyImagesForm" method="POST" enctype="multipart/form-data">
+    <div>
+      <label for="serviceOnlyImagesImage">Choose Image:</label>
+      <input type="file" id="serviceOnlyImagesImage" name="image" accept=".jpg, .jpeg, .png" required>
+    </div>
+    <button type="submit">Upload</button>
+  </form>
+
+  <!-- Form for service description -->
+  <h3>Service Description (Title and Description)</h3>
+  <form id="serviceDescriptionForm" method="POST">
+    <div>
+      <label for="serviceDescriptionTitle">Title:</label>
+      <input type="text" id="serviceDescriptionTitle" name="title" required>
+    </div>
+    <div>
+      <label for="serviceDescriptionDescription">Description:</label>
+      <textarea id="serviceDescriptionDescription" name="description" required></textarea>
+    </div>
+    <button type="submit">Upload</button>
+  </form>
+
+  <!-- Form for other service -->
+  <h3>Other Service (Only Title)</h3>
+  <form id="otherServiceForm" method="POST">
+    <div>
+      <label for="otherServiceTitle">Title:</label>
+      <input type="text" id="otherServiceTitle" name="title" required>
+    </div>
+    <button type="submit">Upload</button>
+  </form>
+
+  <script>
+    // Function to handle form submission
+    async function handleFormSubmit(event, formId, endpoint) {
+      event.preventDefault();
+      const form = document.getElementById(formId);
+      const formData = new FormData(form);
+
+      try {
+        const response = await fetch(`http://localhost:8081/api/${endpoint}`, {
+          method: 'POST',
+          body: formData
+        });
+        if (!response.ok) {
+          throw new Error('Error uploading data');
+        }
+        console.log('Data uploaded successfully');
+        form.reset();
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    }
+
+    // Event listeners for form submission
+    document.getElementById('serviceImagesForm').addEventListener('submit', (event) => handleFormSubmit(event, 'serviceImagesForm', 'serviceImages'));
+    document.getElementById('serviceOnlyImagesForm').addEventListener('submit', (event) => handleFormSubmit(event, 'serviceOnlyImagesForm', 'serviceOnlyImages'));
+    document.getElementById('serviceDescriptionForm').addEventListener('submit', (event) => handleFormSubmit(event, 'serviceDescriptionForm', 'serviceDescription'));
+    document.getElementById('otherServiceForm').addEventListener('submit', (event) => handleFormSubmit(event, 'otherServiceForm', 'otherService'));
+  </script>
+</body>
+</html>
